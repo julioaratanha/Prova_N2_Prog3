@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.femass.gui.CadVendaController">
+   <children>
+      <Pane prefHeight="400.0" prefWidth="625.0">
+         <children>
+            <Button fx:id="BtnCadastrarVenda" layoutX="226.0" layoutY="561.0" mnemonicParsing="false" onAction="#BtnCadastrarVenda_Action" text="Cadastrar Venda" />
+            <ListView fx:id="LstDiscos" disable="true" layoutX="14.0" layoutY="30.0" onKeyPressed="#LstDiscos_KeyPressed" onMouseClicked="#LstDiscos_MouseClicked" prefHeight="143.0" prefWidth="516.0" />
+            <Button fx:id="BtnRetornar" layoutX="14.0" layoutY="561.0" mnemonicParsing="false" onAction="#BtnRetornar_Action" text="Retornar" />
+            <Label layoutX="230.0" layoutY="6.0" text="Discos Cadastrados" />
+            <ListView fx:id="LstVendas" layoutX="14.0" layoutY="419.0" onKeyPressed="#LstVendas_KeyPressed" onMouseClicked="#LstVendas_MouseClicked" prefHeight="134.0" prefWidth="516.0" />
+            <Label layoutX="215.0" layoutY="394.0" text="Vendas Concluídas" />
+            <ListView fx:id="LstClientes" disable="true" layoutX="14.0" layoutY="229.0" onKeyPressed="#LstClientes_KeyPressed" onMouseClicked="#LstClientes_MouseClicked" prefHeight="143.0" prefWidth="516.0" />
+            <Label layoutX="213.0" layoutY="195.0" text="Clientes Cadastrados" />
+            <Button fx:id="BtnAdicionarDisco" disable="true" layoutX="535.0" layoutY="30.0" mnemonicParsing="false" onAction="#BtnAdicionarDisco_Action" text="Adicionar" />
+            <Button fx:id="BtnSelecionarCliente" disable="true" layoutX="537.0" layoutY="229.0" mnemonicParsing="false" onAction="#BtnSelecionarCliente_Action" text="Selecionar" />
+         </children>
+      </Pane>
+      <Pane prefHeight="400.0" prefWidth="625.0">
+         <children>
+            <TextField fx:id="TxtNotaFiscal" disable="true" editable="false" layoutX="162.0" layoutY="38.0" prefHeight="25.0" prefWidth="171.0" />
+            <Label layoutX="91.0" layoutY="42.0" text="Nota Fiscal" />
+            <TextField fx:id="TxtDataVenda" disable="true" editable="false" layoutX="162.0" layoutY="78.0" prefHeight="25.0" prefWidth="99.0" />
+            <Label layoutX="199.0" layoutY="134.0" text="Cliente" />
+            <Label layoutX="65.0" layoutY="201.0" text="Nome" />
+            <Label layoutX="50.0" layoutY="236.0" text="Sobrenome" />
+            <TextField fx:id="TxtNomeCliente" disable="true" editable="false" layoutX="123.0" layoutY="197.0" prefHeight="25.0" prefWidth="214.0" />
+            <TextField fx:id="TxtSobrenomeCliente" disable="true" editable="false" layoutX="123.0" layoutY="232.0" prefHeight="25.0" prefWidth="214.0" />
+            <Button fx:id="BtnCancelar" disable="true" layoutX="282.0" layoutY="561.0" mnemonicParsing="false" onAction="#BtnCancelar_Action" text="Cancelar" />
+            <Button fx:id="BtnGravar" disable="true" layoutX="358.0" layoutY="561.0" mnemonicParsing="false" onAction="#BtnGravar_Action" text="Gravar" />
+            <ListView fx:id="LstDetalheVenda" disable="true" layoutX="111.0" layoutY="291.0" onKeyPressed="#LstDetalheVenda_KeyPressed" onMouseClicked="#LstDetalheVenda_MouseClicked" prefHeight="255.0" prefWidth="493.0" />
+            <Button fx:id="BtnRemoverDisco" disable="true" layoutX="7.0" layoutY="406.0" mnemonicParsing="false" onAction="#BtnRemoverDisco_Action" text="Remover disco" />
+            <Label layoutX="30.0" layoutY="456.0" text="Quantidade" />
+            <Button fx:id="BtnAumentarQuantidade" disable="true" layoutX="52.0" layoutY="480.0" mnemonicParsing="false" onAction="#BtnAumentarQuantidade_Action" text="+" />
+            <Button fx:id="BtnDiminuirQuantidade" disable="true" layoutX="52.0" layoutY="514.0" mnemonicParsing="false" onAction="#BtnDiminuirQuantidade_Action" prefHeight="25.0" prefWidth="26.0" text="-" />
+            <TextField fx:id="TxtCPF" disable="true" editable="false" layoutX="122.0" layoutY="160.0" prefHeight="25.0" prefWidth="214.0" />
+            <Label layoutX="73.0" layoutY="82.0" text="Data da Venda" />
+            <Label layoutX="79.0" layoutY="164.0" text="CPF" />
+            <Label layoutX="318.0" layoutY="266.0" text="Itens da Venda" />
+         </children>
+      </Pane>
+   </children>
+</HBox>

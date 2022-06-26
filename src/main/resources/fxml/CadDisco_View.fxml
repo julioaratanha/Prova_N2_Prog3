@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="786.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.femass.gui.CadDiscoController">
+   <children>
+      <Pane prefHeight="400.0" prefWidth="601.0">
+         <children>
+            <Button fx:id="BtnIncluir" layoutX="171.0" layoutY="561.0" mnemonicParsing="false" onAction="#BtnIncluir_Action" text="Incluir" />
+            <Button fx:id="BtnAlterar" disable="true" layoutX="227.0" layoutY="561.0" mnemonicParsing="false" onAction="#BtnAlterar_Action" text="Alterar" visible="false" />
+            <Button fx:id="BtnExcluir" layoutX="287.0" layoutY="561.0" mnemonicParsing="false" onAction="#BtnExcluir_Action" text="Excluir" />
+            <ListView fx:id="LstDiscos" layoutX="14.0" layoutY="30.0" onKeyPressed="#LstDiscos_KeyPressed" onMouseClicked="#LstDiscos_MouseClicked" prefHeight="523.0" prefWidth="327.0" />
+            <Button fx:id="BtnRetornar" layoutX="14.0" layoutY="561.0" mnemonicParsing="false" onAction="#BtnRetornar_Action" text="Retornar" />
+         </children>
+      </Pane>
+      <Pane prefHeight="400.0" prefWidth="606.0">
+         <children>
+            <TextField fx:id="TxtTitulo" disable="true" editable="false" layoutX="162.0" layoutY="78.0" prefHeight="25.0" prefWidth="171.0" />
+            <TextField fx:id="TxtArtista" disable="true" editable="false" layoutX="164.0" layoutY="120.0" prefHeight="25.0" prefWidth="171.0" />
+            <Label layoutX="110.0" layoutY="82.0" text="Título" />
+            <Label layoutX="106.0" layoutY="124.0" text="Artista" />
+            <Label layoutX="114.0" layoutY="155.0" text="Ano" />
+            <Label layoutX="107.0" layoutY="188.0" text="Gênero" />
+            <Label layoutX="65.0" layoutY="283.0" text="Estoque" />
+            <Label layoutX="47.0" layoutY="321.0" text="Preço Venda" />
+            <TextField fx:id="TxtAno" disable="true" editable="false" layoutX="166.0" layoutY="151.0" prefHeight="25.0" prefWidth="65.0" />
+            <TextField fx:id="TxtGenero" disable="true" editable="false" layoutX="166.0" layoutY="184.0" prefHeight="25.0" prefWidth="77.0" />
+            <TextField fx:id="TxtEstoque" disable="true" editable="false" layoutX="123.0" layoutY="279.0" prefHeight="25.0" prefWidth="40.0" />
+            <TextField fx:id="TxtPreco" disable="true" editable="false" layoutX="123.0" layoutY="317.0" prefHeight="25.0" prefWidth="77.0" />
+            <Button fx:id="BtnCancelar" disable="true" layoutX="24.0" layoutY="561.0" mnemonicParsing="false" onAction="#BtnCancelar_Action" text="Cancelar" />
+            <Button fx:id="BtnGravar" disable="true" layoutX="272.0" layoutY="561.0" mnemonicParsing="false" onAction="#BtnGravar_Action" text="Gravar" />
+            <Button fx:id="BtnConfirmarAlteracao" disable="true" layoutX="117.0" layoutY="561.0" mnemonicParsing="false" onAction="#BtnConfirmarAlteracao_Action" text="Confirmar Alteração" visible="false" />
+         </children>
+      </Pane>
+   </children>
+</HBox>
