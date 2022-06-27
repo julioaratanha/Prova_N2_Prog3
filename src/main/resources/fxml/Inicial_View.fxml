@@ -4,17 +4,18 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-<HBox minHeight="400.0" minWidth="400.0" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.femass.gui.InicialController">
+<HBox minHeight="367.0" minWidth="400.0" prefHeight="367.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.femass.gui.InicialController">
    <children>
       <Pane prefHeight="400.0" prefWidth="601.0">
          <children>
-            <Button fx:id="BtnTelaEstoque" layoutX="248.0" layoutY="72.0" mnemonicParsing="false" onAction="#BtnTelaEstoque_Action" text="Tela de Estoque" />
-            <Button fx:id="BtnFechCaixa" layoutX="232.0" layoutY="140.0" mnemonicParsing="false" onAction="#BtnFechCaixa_Action" text="Fechamento do Caixa" />
-            <Button fx:id="BtnCadPessoa" layoutX="46.0" layoutY="72.0" mnemonicParsing="false" onAction="#BtnCadPessoa_Action" text="Cadastrar Pessoas" />
-            <Button fx:id="BtnCadDisco" layoutX="53.0" layoutY="127.0" mnemonicParsing="false" onAction="#BtnCadDisco_Action" text="Cadastrar Disco" />
-            <Button fx:id="BtnCadArt" layoutX="51.0" layoutY="188.0" mnemonicParsing="false" onAction="#BtnCadArt_Action" text="Cadastrar Artista" />
-            <Button fx:id="BtnCadCompra" layoutX="47.0" layoutY="241.0" mnemonicParsing="false" onAction="#BtnCadCompra_Action" text="Cadastrar Compra" />
-            <Button fx:id="BtnCadVenda" layoutX="51.0" layoutY="288.0" mnemonicParsing="false" onAction="#BtnCadVenda_Action" text="Cadastrar Venda" />
+            <Button fx:id="BtnTelaEstoque" layoutX="221.0" layoutY="31.0" mnemonicParsing="false" onAction="#BtnTelaEstoque_Action" prefWidth="150.0" text="Tela de Estoque" />
+            <Button fx:id="BtnFechCaixa" layoutX="221.0" layoutY="87.0" mnemonicParsing="false" onAction="#BtnFechCaixa_Action" prefWidth="150.0" text="Fechamento do Caixa" />
+            <Button fx:id="BtnCadPessoa" layoutX="29.0" layoutY="31.0" mnemonicParsing="false" onAction="#BtnCadPessoa_Action" prefWidth="150.0" text="Cadastrar Pessoas" />
+            <Button fx:id="BtnCadDisco" layoutX="29.0" layoutY="87.0" mnemonicParsing="false" onAction="#BtnCadDisco_Action" prefWidth="150.0" text="Cadastrar Disco" />
+            <Button fx:id="BtnCadArt" layoutX="29.0" layoutY="143.0" mnemonicParsing="false" onAction="#BtnCadArt_Action" prefWidth="150.0" text="Cadastrar Artista" />
+            <Button fx:id="BtnCadCompra" layoutX="29.0" layoutY="255.0" mnemonicParsing="false" onAction="#BtnCadCompra_Action" prefWidth="150.0" text="Cadastrar Compra" />
+            <Button fx:id="BtnCadVenda" layoutX="29.0" layoutY="311.0" mnemonicParsing="false" onAction="#BtnCadVenda_Action" prefWidth="150.0" text="Cadastrar Venda" />
+            <Button fx:id="BtnCadGen" layoutX="29.0" layoutY="199.0" mnemonicParsing="false" onAction="#BtnCadGen_Action" prefWidth="150.0" text="Cadastrar Gênero" />
          </children>
       </Pane>
    </children>

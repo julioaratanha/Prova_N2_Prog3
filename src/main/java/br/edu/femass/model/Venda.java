@@ -20,6 +20,14 @@ public class Venda {
     private Cliente cliente;
     private Set<DetalheVenda> itens=new HashSet<>();
 
+    public Double totalVenda(){
+        Double total=0.0;
+        for (DetalheVenda item : this.itens){
+            total=total+(item.getPrecoUnitario()*item.getQuantidade());
+        }
+        return total;
+    }
+
     @Override
     public String toString() {
         SimpleDateFormat formatadorDeData = new SimpleDateFormat("dd/MM/yyyy");

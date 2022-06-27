@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.femass.gui.TelaFechamentoDiarioController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.femass.gui.TelaFechamentoDiarioController">
    <children>
       <Pane prefHeight="400.0" prefWidth="625.0">
          <children>
@@ -29,52 +29,32 @@
             <Button fx:id="BtnSelecionaDataHoje" disable="true" layoutX="223.0" layoutY="20.0" mnemonicParsing="false" onAction="#BtnSelecionaDataHoje_Action" text="Seleciona Data de Hoje" visible="false" />
             <Label layoutX="252.0" layoutY="61.0" text="Compras do dia" />
             <Label layoutX="252.0" layoutY="266.0" text="Itens da Compra" />
-            <Label fx:id="LblTituloCompras" layoutX="249.0" layoutY="561.0" text="Compras">
+            <Label fx:id="LblTitulo" layoutX="128.0" layoutY="561.0" text="Vendas    -    Compras    =    Saldo">
                <font>
                   <Font name="Arial" size="21.0" />
                </font>
             </Label>
-            <Label fx:id="LblTituloVendas" layoutX="128.0" layoutY="561.0" text="Vendas">
-               <font>
-                  <Font name="Arial" size="21.0" />
-               </font>
-            </Label>
-            <Label fx:id="LblTituloMenos" layoutX="218.0" layoutY="561.0" text="-">
+            <Label fx:id="LblVendas" layoutX="128.0" layoutY="589.0" text="R$ 100">
                <font>
                   <Font size="21.0" />
                </font>
             </Label>
-            <Label fx:id="LblTituloSaldo" layoutX="375.0" layoutY="561.0" text="Saldo">
+            <Label fx:id="LblCompras" layoutX="252.0" layoutY="589.0" text="R$ 100">
                <font>
                   <Font size="21.0" />
                </font>
             </Label>
-            <Label fx:id="LblTituloIgual" layoutX="347.0" layoutY="561.0" text="=">
+            <Label fx:id="LblSaldo" layoutX="395.0" layoutY="589.0" text="R$ 100">
                <font>
                   <Font size="21.0" />
                </font>
             </Label>
-            <Label fx:id="LblVendas" layoutX="129.0" layoutY="589.0" text="R$ 100">
+            <Label fx:id="LblIgual" layoutX="361.0" layoutY="589.0" text="=">
                <font>
                   <Font size="21.0" />
                </font>
             </Label>
-            <Label fx:id="LblCompras" layoutX="257.0" layoutY="589.0" text="R$ 100">
-               <font>
-                  <Font size="21.0" />
-               </font>
-            </Label>
-            <Label fx:id="LblSaldo" layoutX="375.0" layoutY="589.0" text="R$ 100">
-               <font>
-                  <Font size="21.0" />
-               </font>
-            </Label>
-            <Label fx:id="LblIgual" layoutX="347.0" layoutY="589.0" text="=">
-               <font>
-                  <Font size="21.0" />
-               </font>
-            </Label>
-            <Label fx:id="LblMenos" layoutX="218.0" layoutY="589.0" text="-">
+            <Label fx:id="LblMenos" layoutX="222.0" layoutY="589.0" text="-">
                <font>
                   <Font size="21.0" />
                </font>

@@ -1,7 +1,9 @@
 package br.edu.femass.gui;
 
 import br.edu.femass.LojaDiscos;
-import br.edu.femass.model.*;
+import br.edu.femass.model.Artista;
+import br.edu.femass.model.Disco;
+import br.edu.femass.model.Gênero;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,13 +21,17 @@ import java.util.Set;
 import static br.edu.femass.LojaDiscos.*;
 
 
-public class CadDiscoController implements Initializable {
+public class CadGeneroController implements Initializable {
 
     private Disco discoSelecionado;
+    private Gênero generoSelecionado;
 
     //List Views
     @FXML
     private ListView<Disco> LstDiscos;
+
+    @FXML
+    private ListView<Gênero> LstGeneros;
 
     //Botões
     @FXML
@@ -55,19 +61,13 @@ public class CadDiscoController implements Initializable {
     private TextField TxtTitulo;
 
     @FXML
-    private TextField TxtArtista;
+    private TextField TxtGenero;
 
     @FXML
     private TextField TxtAno;
 
     @FXML
-    private TextField TxtGenero;
-
-    @FXML
-    private TextField TxtEstoque;
-
-    @FXML
-    private TextField TxtPreco;
+    private TextField TxtArtista;
 
     //Métodos Auxiliares
 
@@ -76,42 +76,33 @@ public class CadDiscoController implements Initializable {
         TxtArtista.setText("");
         TxtAno.setText("");
         TxtGenero.setText("");
-        TxtEstoque.setText("");
-        TxtPreco.setText("");
     }
 
     private void habilitarInterface(Boolean incluir){
-        TxtTitulo.setDisable(!incluir);
-        TxtTitulo.setEditable(incluir);
-
-        TxtArtista.setDisable(!incluir);
-        TxtArtista.setEditable(incluir);
-
-        TxtAno.setDisable(!incluir);
-        TxtAno.setEditable(incluir);
 
         TxtGenero.setDisable(!incluir);
         TxtGenero.setEditable(incluir);
-
-        TxtPreco.setDisable(!incluir);
-        TxtPreco.setEditable(incluir);
 
         BtnGravar.setDisable(!incluir);
         BtnCancelar.setDisable(!incluir);
         BtnIncluir.setDisable(incluir);
         BtnExcluir.setDisable(incluir);
         BtnRetornar.setDisable(incluir);
+
+        LstGeneros.setDisable(incluir);
         LstDiscos.setDisable(incluir);
     }
 
     public void atualizarLista(){
-        Set<Disco> discos = new HashSet<>();
+        Set<Gênero> generos = new HashSet<>();
         try {
-            discos = discoDao.listar();
+            generos = generoDao.listar();
         } catch (Exception e){
             e.printStackTrace();
         }
-        ObservableList<Disco> discosOb = FXCollections.observableArrayList(discos);
+        ObservableList<Gênero> generosOb = FXCollections.observableArrayList(generos);
+        LstGeneros.setItems(generosOb);
+        ObservableList<Disco> discosOb = FXCollections.observableArrayList();
         LstDiscos.setItems(discosOb);
     }
 
@@ -119,13 +110,31 @@ public class CadDiscoController implements Initializable {
         discoSelecionado = LstDiscos.getSelectionModel().getSelectedItem();
         if (discoSelecionado==null) return;
         TxtTitulo.setText(discoSelecionado.getTitulo());
-        TxtArtista.setText(discoSelecionado.getArtista().getNome());
         TxtAno.setText(discoSelecionado.getAno().toString());
-        TxtGenero.setText(discoSelecionado.getGenero().getNome());
-        TxtEstoque.setText(discoSelecionado.getEstoque().toString());
-        TxtPreco.setText(discoSelecionado.getPrecoVenda().toString());
+        TxtArtista.setText(discoSelecionado.getArtista().getNome());
         ativaBtnAlterar(true);
     }
+
+    private void  exibirGenero(){
+        generoSelecionado = LstGeneros.getSelectionModel().getSelectedItem();
+        if (generoSelecionado==null) return;
+        TxtGenero.setText(generoSelecionado.getNome());
+        ativaBtnAlterar(true);
+        Set<Disco> discos = new HashSet<>();
+        Set<Disco> discosDoGenero = new HashSet<>();
+        try{
+            discos = discoDao.listar();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        for (Disco disco : discos){
+            if (disco.getGenero().equals(generoSelecionado)) discosDoGenero.add(disco);
+        }
+        ObservableList<Disco> discosOb = FXCollections.observableArrayList(discosDoGenero);
+        LstDiscos.setItems(discosOb);
+    }
+
+
 
     private void ativaBtnAlterar(boolean ativa){
         BtnAlterar.setVisible(ativa);
@@ -133,13 +142,14 @@ public class CadDiscoController implements Initializable {
     }
 
     private void ativaBtnConfirmarAlteracao(boolean ativa){
+        atualizarLista();
         BtnConfirmarAlteracao.setVisible(ativa);
         BtnConfirmarAlteracao.setDisable(!ativa);
         BtnGravar.setVisible(!ativa);
         BtnGravar.setDisable(ativa);
     }
 
-    public Gênero verificaGeneroExistente(String nome){
+    public Boolean generoExistente(String nome){
         Set<Gênero> generos = new HashSet<>();
         Gênero novo = new Gênero();
         novo.setNome(nome);
@@ -149,72 +159,24 @@ public class CadDiscoController implements Initializable {
             e.printStackTrace();
         }
         for (Gênero genero: generos){
-            if (novo.equals(genero)) {
-                novo.setId(genero.getId());
-                return novo;
-            }
+            if (novo.equals(genero)) return true;
         }
-        try {
-            generoDao.gravar(novo);
-            generos = generoDao.listar();
-            for (Gênero genero: generos){
-                if (novo.equals(genero)) {
-                    novo.setId(genero.getId());
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return novo;
+        return false;
     }
 
-    public Artista verificaArtistaExistente(String nome){
-        Set<Artista> artistas = new HashSet<>();
-        Artista novo = new Artista();
-        novo.setNome(nome);
+    public void incluir_ou_alterar_genero(Gênero genero, String tipo){
+        genero.setNome(TxtGenero.getText());
         try {
-            artistas = artistaDao.listar();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        for (Artista artista: artistas){
-            if (novo.equals(artista)) {
-                novo.setId(artista.getId());
-                return novo;
+            if (tipo=="inserir"){
+                if (generoExistente(genero.getNome())) return;
+                generoDao.gravar(genero);
             }
-        }
-        try {
-            artistaDao.gravar(novo);
-            artistas = artistaDao.listar();
-            for (Artista artista: artistas){
-                if (novo.equals(artista)) {
-                    novo.setId(artista.getId());
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return novo;
-    }
-
-    public void incluir_ou_alterar_disco(Disco disco, String tipo){
-        disco.setTitulo(TxtTitulo.getText());
-        disco.setPrecoVenda(Double.parseDouble(TxtPreco.getText()));
-        disco.setAno(Integer.parseInt(TxtAno.getText()));
-        disco.setGenero(verificaGeneroExistente(TxtGenero.getText()));
-        disco.setArtista(verificaArtistaExistente(TxtArtista.getText()));
-        try {
-            if (tipo=="inserir") discoDao.gravar(disco);
             else if (tipo=="alterar") {
-                discoDao.alterar(disco);
+                generoDao.alterar(genero);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-            errorAlert.setContentText(e.getMessage());
-            errorAlert.show();
         }
-
     }
 
     //Actions
@@ -223,7 +185,7 @@ public class CadDiscoController implements Initializable {
         atualizarLista();
         habilitarInterface(true);
         limparTela();
-        TxtTitulo.requestFocus();
+        TxtGenero.requestFocus();
         ativaBtnAlterar(false);
     }
 
@@ -231,14 +193,14 @@ public class CadDiscoController implements Initializable {
     private void BtnAlterar_Action(ActionEvent event) {
         atualizarLista();
         habilitarInterface(true);
-        TxtTitulo.requestFocus();
+        TxtGenero.requestFocus();
         ativaBtnAlterar(false);
         ativaBtnConfirmarAlteracao(true);
     }
 
     @FXML
     private void BtnConfirmarAlteracao_Action(ActionEvent event) {
-        incluir_ou_alterar_disco(discoSelecionado, "alterar");
+        incluir_ou_alterar_genero(generoSelecionado, "alterar");
         atualizarLista();
         ativaBtnConfirmarAlteracao(false);
         habilitarInterface(false);
@@ -246,10 +208,10 @@ public class CadDiscoController implements Initializable {
 
     @FXML
     private void BtnExcluir_Action(ActionEvent event) {
-        discoSelecionado = LstDiscos.getSelectionModel().getSelectedItem();
-        if (discoSelecionado==null) return;
+        generoSelecionado = LstGeneros.getSelectionModel().getSelectedItem();
+        if (generoSelecionado==null) return;
         try {
-            discoDao.excluir(discoSelecionado);
+            generoDao.excluir(generoSelecionado);
         } catch (Exception e) {
             e.printStackTrace();
             Alert errorAlert = new Alert(Alert.AlertType.ERROR);
@@ -265,10 +227,11 @@ public class CadDiscoController implements Initializable {
 
     @FXML
     private void BtnGravar_Action(ActionEvent event) {
-        Disco disco = new Disco();
-        incluir_ou_alterar_disco(disco, "inserir");
+        Gênero genero = new Gênero();
+        incluir_ou_alterar_genero(genero, "inserir");
         atualizarLista();
         habilitarInterface(false);
+        limparTela();
     }
 
     @FXML
@@ -291,6 +254,16 @@ public class CadDiscoController implements Initializable {
     @FXML
     private void LstDiscos_MouseClicked(MouseEvent event){
         exibirDisco();
+    }
+
+    @FXML
+    private void LstGeneros_KeyPressed(KeyEvent event){
+        exibirGenero();
+    }
+
+    @FXML
+    private void LstGeneros_MouseClicked(MouseEvent event){
+        exibirGenero();
     }
 
     @Override

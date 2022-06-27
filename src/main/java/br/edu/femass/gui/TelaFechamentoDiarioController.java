@@ -15,6 +15,7 @@ import javafx.scene.text.Font;
 
 import java.net.URL;
 import java.sql.Date;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.ResourceBundle;
@@ -60,19 +61,7 @@ public class TelaFechamentoDiarioController implements Initializable {
 
     //Labels
     @FXML
-    private Label LblTituloVendas;
-
-    @FXML
-    private Label LblTituloMenos;
-
-    @FXML
-    private Label LblTituloCompras;
-
-    @FXML
-    private Label LblTituloIgual;
-
-    @FXML
-    private Label LblTituloSaldo;
+    private Label LblTitulo;
 
     @FXML
     private Label LblVendas;
@@ -91,6 +80,7 @@ public class TelaFechamentoDiarioController implements Initializable {
 
     //Métodos Auxiliares
     private void atualizarLista(Date data){
+        DecimalFormat df = new DecimalFormat("0.00");
         Set<Venda> vendas = null;
         Set<Compra> compras = null;
         Set<Venda> vendasDataSelecionada = new HashSet<>();
@@ -99,7 +89,6 @@ public class TelaFechamentoDiarioController implements Initializable {
             vendas = vendaDao.listar();
             for (Venda venda : vendas){
                 if ((venda.getData().getYear()==data.getYear()) && (venda.getData().getMonth()==data.getMonth()) && (venda.getData().getDay()==data.getDay())) {
-                    System.out.println("Data venda: "+venda.getData()+" Data escolhida: "+data);
                     vendasDataSelecionada.add(venda);
                 }
             }
@@ -115,7 +104,6 @@ public class TelaFechamentoDiarioController implements Initializable {
             compras = compraDao.listar();
             for (Compra compra : compras){
                 if ((compra.getData().getYear()==data.getYear()) && (compra.getData().getMonth()==data.getMonth()) && (compra.getData().getDay()==data.getDay())) {
-                    System.out.println("Data compra: "+compra.getData()+" Data escolhida: "+data);
                     comprasDataSelecionada.add(compra);
                 }
             }
@@ -135,26 +123,22 @@ public class TelaFechamentoDiarioController implements Initializable {
         TxtData.setText(formatadorDeData.format(data));
         Double totalVendas=0.0;
         for (Venda venda : vendasDataSelecionada){
-            for (DetalheVenda item : venda.getItens()){
-                totalVendas=totalVendas+(item.getQuantidade()*item.getPrecoUnitario());
-            }
+            totalVendas=totalVendas+venda.totalVenda();
         }
         Double totalCompras=0.0;
         for (Compra compra : comprasDataSelecionada){
-            for (DetalheCompra item : compra.getItens()){
-                totalCompras=totalCompras+(item.getQuantidade()*item.getPrecoUnitario());
-            }
+            totalCompras=totalCompras+compra.totalCompra();
         }
         Double saldo = totalVendas-totalCompras;
         Font arial = new Font("Arial", 21);
         LblVendas.setFont(arial);
-        LblVendas.setText("R$"+totalVendas);
+        LblVendas.setText("R$"+df.format(totalVendas));
 
         LblCompras.setFont(arial);
-        LblCompras.setText("R$"+totalCompras);
+        LblCompras.setText("R$"+df.format(totalCompras));
 
         LblSaldo.setFont(arial);
-        LblSaldo.setText("R$"+saldo);
+        LblSaldo.setText("R$"+df.format(saldo));
 
         if (saldo>=0) LblSaldo.setTextFill(Color.color(0,1,0));
         else LblSaldo.setTextFill(Color.color(1,0,0));
@@ -264,7 +248,6 @@ public class TelaFechamentoDiarioController implements Initializable {
                 dia=null;
             }
         }while((dia==null) | (dia<1) | (dia>31));
-        System.out.println("Ano: "+ano+" Mês: "+mes+" Dia: "+dia);
         Date data = new Date(ano, mes, dia);
         atualizarLista(data);
         BtnSelecionaDataHoje.setVisible(true);
@@ -314,16 +297,8 @@ public class TelaFechamentoDiarioController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Font arial = new Font("Arial", 21);
-        LblTituloVendas.setFont(arial);
-        LblTituloVendas.setText("Vendas");
-        LblTituloMenos.setFont(arial);
-        LblTituloMenos.setText("-");
-        LblTituloCompras.setFont(arial);
-        LblTituloCompras.setText("Compras");
-        LblTituloIgual.setFont(arial);
-        LblTituloIgual.setText("=");
-        LblTituloSaldo.setFont(arial);
-        LblTituloSaldo.setText("Saldo");
+        LblTitulo.setFont(arial);
+        LblTitulo.setText("Vendas    -    Compras    =    Saldo");
         LblMenos.setFont(arial);
         LblMenos.setText("-");
         LblIgual.setFont(arial);

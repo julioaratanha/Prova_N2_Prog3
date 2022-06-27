@@ -289,6 +289,11 @@ public class CadPessoaController implements Initializable {
             pessoaDao.excluir(pessoaSelecionada);
         } catch (Exception e) {
             e.printStackTrace();
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            DialogPane dp = errorAlert.getDialogPane();
+            dp.setStyle("-fx-font-family: 'serif'");
+            errorAlert.setContentText(e.getMessage());
+            errorAlert.show();
         }
         atualizarLista();
         limparTela();

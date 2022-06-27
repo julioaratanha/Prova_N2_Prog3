@@ -202,6 +202,22 @@ public class CadCompraController implements Initializable {
     @FXML
     private void BtnGravar_Action(ActionEvent event) {
         if (compra==null) return;
+        if (compra.getFornecedor()==null){
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            DialogPane dp = errorAlert.getDialogPane();
+            dp.setStyle("-fx-font-family: 'serif'");
+            errorAlert.setContentText("Selecione um Fornecedor!!");
+            errorAlert.show();
+            return;
+        }
+        if (compra.getItens().isEmpty()){
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            DialogPane dp = errorAlert.getDialogPane();
+            dp.setStyle("-fx-font-family: 'serif'");
+            errorAlert.setContentText("Selecione um Disco!!");
+            errorAlert.show();
+            return;
+        }
         try {
             compra.setData(new Date(System.currentTimeMillis()));
             compraDao.gravar(compra);

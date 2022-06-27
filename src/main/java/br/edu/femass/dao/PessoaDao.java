@@ -161,7 +161,13 @@ public class PessoaDao extends DaoPostgres implements Dao<Pessoa>{
     public void excluir(Pessoa value) throws Exception {
 
         try {
-            String sql = "";
+            String sql = "delete from pessoa where id = ?";
+            PreparedStatement ps2 = con.prepareStatement(sql);
+
+            ps2.setLong(1, value.getId());
+            ps2.executeUpdate();
+
+            sql = "";
             if (value instanceof Cliente) {
                 sql = "delete from cliente where id_pessoa = ?";
             } else {
@@ -170,14 +176,7 @@ public class PessoaDao extends DaoPostgres implements Dao<Pessoa>{
             PreparedStatement ps1 = con.prepareStatement(sql);
             ps1.setLong(1, value.getId());
             ps1.executeUpdate();
-
-            sql = "delete from pessoa where id = ?";
-            PreparedStatement ps2 = con.prepareStatement(sql);
-
-            ps2.setLong(1, value.getId());
-            ps2.executeUpdate();
         } catch (SQLException exception) {
-            con.rollback();
             throw exception;
         }
     }

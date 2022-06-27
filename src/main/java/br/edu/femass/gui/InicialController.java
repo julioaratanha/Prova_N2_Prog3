@@ -16,6 +16,12 @@ public class InicialController {
     private Button BtnCadDisco;
 
     @FXML
+    private Button BtnCadArt;
+
+    @FXML
+    private Button BtnCadGen;
+
+    @FXML
     private Button BtnCadCompra;
 
     @FXML
@@ -37,6 +43,16 @@ public class InicialController {
     @FXML
     private void BtnCadDisco_Action(ActionEvent event) {
         LojaDiscos.irTelaCadastroDisco();
+    }
+
+    @FXML
+    private void BtnCadArt_Action(ActionEvent event) {
+        LojaDiscos.irTelaCadastroArtista();
+    }
+
+    @FXML
+    private void BtnCadGen_Action(ActionEvent event) {
+        LojaDiscos.irTelaCadastroGenero();
     }
 
     @FXML

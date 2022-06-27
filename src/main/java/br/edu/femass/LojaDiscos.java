@@ -60,6 +60,13 @@ public class LojaDiscos extends Application {
         trocarTela("/fxml/CadDisco_View.fxml", "Cadastro de Discos", 786, 600);
     }
 
+    public static void irTelaCadastroArtista(){
+        trocarTela("/fxml/CadArtista_View.fxml", "Cadastro de Artistas", 786, 600);
+    }
+
+    public static void irTelaCadastroGenero(){
+        trocarTela("/fxml/CadGenero_View.fxml", "Cadastro de Artistas", 786, 600);
+    }
 
     public static void irTelaCadastroCompra(){
         trocarTela("/fxml/CadCompra_View.fxml", "Cadastro de Compras", 1250, 600);

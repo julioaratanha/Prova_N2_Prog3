@@ -18,6 +18,14 @@ public class Compra {
     private Fornecedor fornecedor;
     private Set<DetalheCompra> itens=new HashSet<>();
 
+    public Double totalCompra(){
+        Double total=0.0;
+        for (DetalheCompra item : this.itens){
+            total=total+(item.getPrecoUnitario()*item.getQuantidade());
+        }
+        return total;
+    }
+
     @Override
     public String toString() {
         SimpleDateFormat formatadorDeData = new SimpleDateFormat("dd/MM/yyyy");

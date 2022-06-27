@@ -199,6 +199,22 @@ public class CadVendaController implements Initializable {
     @FXML
     private void BtnGravar_Action(ActionEvent event) {
         if (venda==null) return;
+        if (venda.getCliente()==null){
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            DialogPane dp = errorAlert.getDialogPane();
+            dp.setStyle("-fx-font-family: 'serif'");
+            errorAlert.setContentText("Selecione um Cliente!!");
+            errorAlert.show();
+            return;
+        }
+        if (venda.getItens().isEmpty()){
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            DialogPane dp = errorAlert.getDialogPane();
+            dp.setStyle("-fx-font-family: 'serif'");
+            errorAlert.setContentText("Selecione um Disco!!");
+            errorAlert.show();
+            return;
+        }
         try {
             for (DetalheVenda detalhe : venda.getItens()){
                 Integer estoque = detalhe.getDisco().getEstoque();
